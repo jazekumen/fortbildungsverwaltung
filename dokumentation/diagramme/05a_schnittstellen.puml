@@ -1,0 +1,66 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+top to bottom direction
+class FortbildungsverwaltungHS {
+ +oeffnen()
+}
+class LoginAAS {
+ +oeffnen()
+}
+class AdminAS {
+ +oeffnen()
+}
+class NormalAS {
+ +oeffnen()
+}
+class SachbearbeiterS {
+ +praesentiereSachbearbeiter(name)
+}
+class SachbearbeiterBearbeitenAAS {
+ #modifiziereSachbearbeiter(admin)
+}
+class AdminSachbearbeiterBearbeitenAAS
+class NormalSachbearbeiterBearbeitenAAS
+class SachbearbeiterAuswaehlenAAS {
+ +oeffnen() : String
+}
+class SachbearbeiterErfassenAAS
+class SachbearbeiterLoeschenAAS
+class FortbildungZuordnenAAS
+class FortbildungAuswaehlenAAS
+class FortbildungsZuordnungLoeschenAAS
+class FortbildungsZuordnungAuswaehlenAAS
+class FortbildungsZuordnungenAnzeigenAAS
+FortbildungsverwaltungHS --> LoginAAS
+LoginAAS --> AdminAS
+LoginAAS --> NormalAS
+LoginAAS --> SachbearbeiterS
+AdminAS --> SachbearbeiterErfassenAAS
+AdminAS --> SachbearbeiterLoeschenAAS
+AdminAS --> AdminSachbearbeiterBearbeitenAAS
+NormalAS --> NormalSachbearbeiterBearbeitenAAS
+AdminSachbearbeiterBearbeitenAAS --|> SachbearbeiterBearbeitenAAS
+NormalSachbearbeiterBearbeitenAAS --|> SachbearbeiterBearbeitenAAS
+SachbearbeiterBearbeitenAAS --> SachbearbeiterS
+SachbearbeiterBearbeitenAAS --> SachbearbeiterAuswaehlenAAS
+SachbearbeiterLoeschenAAS --> SachbearbeiterAuswaehlenAAS
+AdminAS --> FortbildungZuordnenAAS
+NormalAS --> FortbildungZuordnenAAS
+AdminAS --> FortbildungsZuordnungLoeschenAAS
+NormalAS --> FortbildungsZuordnungLoeschenAAS
+AdminAS --> FortbildungsZuordnungenAnzeigenAAS
+NormalAS --> FortbildungsZuordnungenAnzeigenAAS
+FortbildungZuordnenAAS --> SachbearbeiterAuswaehlenAAS
+FortbildungZuordnenAAS --> FortbildungAuswaehlenAAS
+FortbildungsZuordnungLoeschenAAS --> SachbearbeiterAuswaehlenAAS
+FortbildungsZuordnungLoeschenAAS --> FortbildungsZuordnungAuswaehlenAAS
+FortbildungsZuordnungenAnzeigenAAS --> SachbearbeiterAuswaehlenAAS
+@enduml

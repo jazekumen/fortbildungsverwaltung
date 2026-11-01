@@ -1,0 +1,56 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+top to bottom direction
+class FortbildungsService
+class LoginK {
+ +passwortPasstZuBenutzername(name, passwort) : String
+ +gewaehlteBerechtigungPasstZuSachbearbeiter(name, admin) : String
+}
+class SachbearbeiterBearbeitenK {
+ +schreibeSachbearbeiter(alt, neu, passwort, admin) : String
+}
+class SachbearbeiterErfassenK {
+ +erzeugeSachbearbeiter(name, passwort, admin) : String
+}
+class SachbearbeiterLoeschenK {
+ +loescheSachbearbeiter(name) : String
+}
+class FortbildungZuordnenK {
+ +belegeFortbildung(name, titel)
+ +besteheFortbildung(name, titel)
+}
+class FortbildungAuswaehlenK
+class FortbildungszuordnungLoeschenK
+class FortbildungszuordnungenAnzeigenK
+class FortbildungszuordnungAuswaehlenK
+class Sachbearbeiter
+class Fortbildung
+FortbildungsService --> LoginK
+FortbildungsService --> SachbearbeiterBearbeitenK
+FortbildungsService --> SachbearbeiterErfassenK
+FortbildungsService --> SachbearbeiterLoeschenK
+FortbildungsService --> FortbildungZuordnenK
+FortbildungsService --> FortbildungAuswaehlenK
+FortbildungsService --> FortbildungszuordnungLoeschenK
+FortbildungsService --> FortbildungszuordnungenAnzeigenK
+FortbildungszuordnungenAnzeigenK --> FortbildungszuordnungAuswaehlenK
+LoginK --> Sachbearbeiter
+SachbearbeiterBearbeitenK --> Sachbearbeiter
+SachbearbeiterErfassenK --> Sachbearbeiter
+SachbearbeiterLoeschenK --> Sachbearbeiter
+FortbildungZuordnenK --> Sachbearbeiter
+FortbildungZuordnenK --> Fortbildung
+FortbildungAuswaehlenK --> Sachbearbeiter
+FortbildungAuswaehlenK --> Fortbildung
+FortbildungszuordnungLoeschenK --> Sachbearbeiter
+FortbildungszuordnungLoeschenK --> Fortbildung
+FortbildungszuordnungAuswaehlenK --> Sachbearbeiter
+@enduml

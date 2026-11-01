@@ -1,0 +1,44 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+package Schnittstellenschicht {
+ class MainActivity
+ class AlbumFragment
+ class AlbumViewModel {
+  +title : MutableLiveData<String>
+  +artist : MutableLiveData<String>
+  +composer : MutableLiveData<String>
+  +classical : MutableLiveData<Boolean>
+  +select(position)
+  +apply()
+  +cancel()
+ }
+ class "XML DataBinding" as XML
+ class SavedStateHandle
+}
+package Datenhaltungsschicht {
+ class Album {
+  {static} albums : List<Album>
+  {static} gib(index) : Album
+  {static} gibAlleNamen() : String[]
+  -title : String
+  -artist : String
+  -composer : String
+  -classical : boolean
+ }
+}
+MainActivity *-- AlbumFragment
+AlbumFragment --> AlbumViewModel : ViewModelProvider
+AlbumFragment --> XML : LifecycleOwner
+XML <--> AlbumViewModel : Two-way Binding
+AlbumFragment <-- AlbumViewModel : LiveData Observer\nTitelliste / Auswahl
+AlbumViewModel --> SavedStateHandle : Entwurf / Zustand
+AlbumViewModel --> Album : Apply / Auswahl / Cancel
+@enduml

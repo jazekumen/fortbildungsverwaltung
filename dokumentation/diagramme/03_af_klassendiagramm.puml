@@ -1,0 +1,43 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+top to bottom direction
+class LoginAF
+class AdminMenueAF
+class NormalMenueAF
+class SachbearbeiterErfassenAF
+class SachbearbeiterBearbeitenAF
+class SachbearbeiterLoeschenAF
+class SachbearbeiterAuswaehlenAF
+class FortbildungZuordnenAF
+class FortbildungAuswaehlenAF
+class FortbildungszuordnungLoeschenAF
+class FortbildungszuordnungAuswaehlenAF
+class FortbildungszuordnungenAnzeigenAF
+LoginAF --> AdminMenueAF
+LoginAF --> NormalMenueAF
+AdminMenueAF --> SachbearbeiterErfassenAF
+AdminMenueAF --> SachbearbeiterLoeschenAF
+AdminMenueAF --> SachbearbeiterBearbeitenAF
+NormalMenueAF --> SachbearbeiterBearbeitenAF
+AdminMenueAF --> FortbildungZuordnenAF
+NormalMenueAF --> FortbildungZuordnenAF
+AdminMenueAF --> FortbildungszuordnungLoeschenAF
+NormalMenueAF --> FortbildungszuordnungLoeschenAF
+AdminMenueAF --> FortbildungszuordnungenAnzeigenAF
+NormalMenueAF --> FortbildungszuordnungenAnzeigenAF
+SachbearbeiterBearbeitenAF --> SachbearbeiterAuswaehlenAF
+SachbearbeiterLoeschenAF --> SachbearbeiterAuswaehlenAF
+FortbildungZuordnenAF --> SachbearbeiterAuswaehlenAF
+FortbildungZuordnenAF --> FortbildungAuswaehlenAF
+FortbildungszuordnungLoeschenAF --> SachbearbeiterAuswaehlenAF
+FortbildungszuordnungLoeschenAF --> FortbildungszuordnungAuswaehlenAF
+FortbildungszuordnungenAnzeigenAF --> SachbearbeiterAuswaehlenAF
+@enduml

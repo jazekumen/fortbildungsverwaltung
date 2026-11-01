@@ -1,0 +1,39 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+top to bottom direction
+package Schnittstellenschicht {
+ class "Konsole: HS / AS / AAS / S" as CLI
+ class "Android: Activities / Fragments" as UI
+}
+package Kontrollschicht {
+ class FortbildungsService {
+  +anmelden(name, passwort, rolle)
+  +bearbeiten(alt, neu, passwort, rolle)
+  +zuordnen(name, titel, bestanden)
+  +zuordnungLoeschen(name, titel)
+ }
+ class "Anwendungsfall-Klassen (*K)" as K
+ class Pruefung
+}
+package Entitaetsschicht {
+ class Sachbearbeiter
+ class Fortbildung
+}
+CLI --> FortbildungsService
+UI --> FortbildungsService
+FortbildungsService --> K
+K --> Pruefung
+K --> Sachbearbeiter
+K --> Fortbildung
+Pruefung --> Sachbearbeiter
+Pruefung --> Fortbildung
+Sachbearbeiter --> Fortbildung : belegt / bestanden
+@enduml

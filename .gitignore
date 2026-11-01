@@ -1,0 +1,32 @@
+# Build-Ausgaben
+build/
+out/
+.gradle/
+*.class
+
+# Lokale Einstellungen (SDK-Pfad usw.)
+local.properties
+
+# IDE-Dateien (IntelliJ IDEA / Android Studio / Eclipse / VS Code)
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+captures/
+
+# Gespeicherte Anwendungsdaten der Konsole
+*.ser
+*.ser.tmp
+
+# Temporäre Testordner von scripts/test_console.py
+test-*/
+__pycache__/
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,5 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"><data><variable name="vm" type="com.example.app3.AlbumViewModel"/></data>
+<LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal" android:baselineAligned="false">
+<ListView android:id="@+id/albums" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="4" android:choiceMode="singleChoice" android:contentDescription="Album auswählen" android:background="#EDF3F3"/>
+<ScrollView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="6" android:fillViewport="true"><include android:id="@+id/editor" layout="@layout/album_form" app:vm="@{vm}"/></ScrollView>
+</LinearLayout></layout>

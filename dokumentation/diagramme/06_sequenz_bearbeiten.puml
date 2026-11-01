@@ -1,0 +1,57 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+actor Administrator as A
+participant SachbearbeiterBearbeitenAAS as B
+participant SachbearbeiterAuswaehlenAAS as Auswahl
+participant FortbildungsService as F
+participant SachbearbeiterBearbeitenK as K
+participant Sachbearbeiter as E
+A -> B : oeffnen()
+B -> Auswahl : oeffnen()
+Auswahl -> F : namen()
+F -> E : gibAlleNamen()
+E --> F : namen
+F --> Auswahl : namen
+Auswahl --> A : Auswahlliste
+A -> Auswahl : auswählen
+Auswahl --> B : alterName
+B -> F : berechtigung(alterName)
+F -> E : gib(alterName).istAdmin()
+E --> F : berechtigung
+F --> B : berechtigung
+B --> A : Name / Berechtigung präsentieren
+A -> B : neuerName, Passwort, Berechtigung
+B -> F : bearbeiten(alt, neu, passwort, admin)
+F -> F : Sitzungsrolle prüfen
+F -> K : schreibeSachbearbeiter(...)
+K -> E : gib(alt)
+E --> K : sachbearbeiter
+K -> E : setzeBenutzername(neu)
+alt Name ungültig
+ K --> F : Fehlermeldung
+else Name gültig
+ K -> E : setzePasswort(passwort)
+ alt Passwort ungültig
+  K -> E : alten Benutzernamen wiederherstellen
+  K --> F : Fehlermeldung
+ else Passwort gültig
+  K -> E : setzeIstAdmin(admin)
+  alt Rolle ungültig (letzter Admin)
+   K -> E : alten Namen und Passwort wiederherstellen
+   K --> F : Fehlermeldung
+  else Änderung gültig
+   K --> F : null
+  end
+ end
+end
+F --> B : Erfolg oder Exception mit Fehlermeldung
+B --> A : Ergebnis anzeigen
+@enduml

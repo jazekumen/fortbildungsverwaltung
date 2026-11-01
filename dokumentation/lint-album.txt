@@ -1,0 +1,60 @@
+PROJEKT/android/album/src/main/AndroidManifest.xml:1: Warning: The attribute android:dataExtractionRules only applies for Android 12 and higher; since minSdkVersion is API 26 you should also set android:fullBackupContent [DataExtractionRules]
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"><application android:allowBackup="false" android:dataExtractionRules="@xml/backup_rules" android:icon="@drawable/ic_app" android:label="@string/app_name" android:theme="@style/AppTheme" android:supportsRtl="true"><activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity></application></manifest>
+                                                                                                                                           ~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "DataExtractionRules":
+   Before Android 12, the attributes android:allowBackup and
+   android:fullBackupContent were used to configure all forms of backup,
+   including cloud backups, device-to-device transfers and adb backup.
+
+   In Android 12 and higher, these attributes have been deprecated and will
+   only apply to cloud backups. You should instead use the attribute
+   android:dataExtractionRules, specifying an @xml resource that configures
+   which files to back up, for cloud backups and for device-to-device
+   transfers, separately. If your minSdkVersion supports older versions,
+   you'll still want to specify an android:fullBackupContent resource if the
+   default behavior is not right for your app.
+
+   https://developer.android.com/about/versions/12/backup-restore#xml-changes
+   https://goo.gle/DataExtractionRules
+
+PROJEKT/android/album/src/main/res/layout/album_form.xml:6: Warning: Hardcoded string "Title", should use @string resource [HardcodedText]
+<TextView android:id="@+id/title_label" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Title" android:labelFor="@id/title" android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@id/labels" app:layout_constraintEnd_toStartOf="@id/fields" app:layout_constraintTop_toTopOf="@id/title" app:layout_constraintBottom_toBottomOf="@id/title"/>
+                                                                                                        ~~~~~~~~~~~~~~~~~~~~
+PROJEKT/android/album/src/main/res/layout/album_form.xml:8: Warning: Hardcoded string "Artist", should use @string resource [HardcodedText]
+<TextView android:id="@+id/artist_label" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Artist" android:labelFor="@id/artist" android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@id/labels" app:layout_constraintEnd_toStartOf="@id/fields" app:layout_constraintTop_toTopOf="@id/artist" app:layout_constraintBottom_toBottomOf="@id/artist"/>
+                                                                                                         ~~~~~~~~~~~~~~~~~~~~~
+PROJEKT/android/album/src/main/res/layout/album_form.xml:10: Warning: Hardcoded string "Classical", should use @string resource [HardcodedText]
+<CheckBox android:id="@+id/classical" android:layout_width="0dp" android:layout_height="48dp" android:text="Classical" android:checked="@={vm.classical}" app:layout_constraintStart_toStartOf="@id/labels" app:layout_constraintEnd_toStartOf="@id/right" app:layout_constraintTop_toBottomOf="@id/artist"/>
+                                                                                              ~~~~~~~~~~~~~~~~~~~~~~~~
+PROJEKT/android/album/src/main/res/layout/album_form.xml:11: Warning: Hardcoded string "Composer", should use @string resource [HardcodedText]
+<TextView android:id="@+id/composer_label" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Composer" android:labelFor="@id/composer" android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@id/labels" app:layout_constraintEnd_toStartOf="@id/fields" app:layout_constraintTop_toTopOf="@id/composer" app:layout_constraintBottom_toBottomOf="@id/composer"/>
+                                                                                                           ~~~~~~~~~~~~~~~~~~~~~~~
+PROJEKT/android/album/src/main/res/layout/album_form.xml:14: Warning: Hardcoded string "Cancel", should use @string resource [HardcodedText]
+<Button android:id="@+id/cancel" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:minWidth="0dp" android:padding="0dp" android:text="Cancel" android:textAllCaps="false" android:onClick="@{() -> vm.cancel()}"/>
+                                                                                                                                                                        ~~~~~~~~~~~~~~~~~~~~~
+PROJEKT/android/album/src/main/res/layout/album_form.xml:16: Warning: Hardcoded string "Apply", should use @string resource [HardcodedText]
+<Button android:id="@+id/apply" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:minWidth="0dp" android:padding="0dp" android:text="Apply" android:textAllCaps="false" android:onClick="@{() -> vm.apply()}"/>
+                                                                                                                                                                       ~~~~~~~~~~~~~~~~~~~~
+PROJEKT/android/album/src/main/res/layout-land/fragment_album.xml:3: Warning: Hardcoded string "Album auswählen", should use @string resource [HardcodedText]
+<ListView android:id="@+id/albums" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="4" android:choiceMode="singleChoice" android:contentDescription="Album auswählen" android:background="#EDF3F3"/>
+                                                                                                                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PROJEKT/android/album/src/main/res/layout/fragment_album.xml:3: Warning: Hardcoded string "Album auswählen", should use @string resource [HardcodedText]
+<ListView android:id="@+id/albums" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="2" android:choiceMode="singleChoice" android:contentDescription="Album auswählen" android:background="#EDF3F3"/>
+                                                                                                                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+0 errors, 9 warnings

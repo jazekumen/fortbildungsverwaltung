@@ -1,0 +1,51 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+class Sachbearbeiter {
+ {static} -dieSachbearbeiter : Map<String,Sachbearbeiter>
+ -benutzername : String
+ -passwort : String
+ -istAdmin : boolean
+ {static} ~erzeuge(name, passwort, istAdmin) : String
+ {static} ~gib(name) : Sachbearbeiter
+ {static} ~gibAlleNamen() : String[]
+ {static} ~pruefeBenutzername(name) : String
+ {static} ~pruefePasswort(passwort) : String
+ {static} ~einlesen()
+ {static} ~abspeichern()
+ ~gibBenutzername() : String
+ ~setzeBenutzername(name) : String
+ ~gibPasswort() : String
+ ~setzePasswort(passwort) : String
+ ~istAdmin() : boolean
+ ~setzeIstAdmin(admin) : String
+ ~loesche() : String
+ ~belege(fortbildung)
+ ~bestehe(fortbildung)
+ ~fortbildungsbelegungLoeschen(fortbildung)
+ ~fortbildungsbestehenLoeschen(fortbildung)
+}
+class Fortbildung {
+ {static} -dieFortbildungen : Map<String,Fortbildung>
+ -name : String
+ {static} ~gib(name) : Fortbildung
+ {static} ~gibAlleNamen() : String[]
+ ~gibName() : String
+ ~gibVoraussetzungen() : Set<Fortbildung>
+ ~istVoraussetzungVon(fortbildung) : boolean
+}
+Sachbearbeiter "0..*" --> "0..*" Fortbildung : belegt
+Sachbearbeiter "0..*" --> "0..*" Fortbildung : bestanden
+Fortbildung "0..*" --> "0..*" Fortbildung : setzt voraus
+note bottom of Sachbearbeiter
+ Mindestens ein Administrator; eindeutiger Name;
+ gültiges Passwort; belegt und bestanden disjunkt.
+end note
+@enduml

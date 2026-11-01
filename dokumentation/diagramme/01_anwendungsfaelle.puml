@@ -1,0 +1,44 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+left to right direction
+actor Normalsachbearbeiter as N
+actor Administrator as A
+A --|> N
+rectangle Fortbildungsverwaltung {
+ usecase "Login mit Rollenwahl" as Login
+ usecase "Sachbearbeiter erfassen" as Create
+ usecase "Sachbearbeiter bearbeiten" as Edit
+ usecase "Berechtigung ändern" as Role
+ usecase "Sachbearbeiter löschen" as Delete
+ usecase "Sachbearbeiter auswählen" as Select
+ usecase "Fortbildung zuordnen" as Assign
+ usecase "Fortbildung auswählen" as Course
+ usecase "Zuordnung löschen" as Remove
+ usecase "Zuordnung auswählen" as Booking
+ usecase "Fortbildungen anzeigen" as Show
+}
+N -- Login
+N -- Edit
+N -- Assign
+N -- Remove
+N -- Show
+A -- Create
+A -- Delete
+A -- Role
+Role ..> Edit : <<extend>>\n[Administratorrolle]
+Edit ..> Select : <<include>>
+Delete ..> Select : <<include>>
+Assign ..> Select : <<include>>
+Assign ..> Course : <<include>>
+Remove ..> Select : <<include>>
+Remove ..> Booking : <<include>>
+Show ..> Select : <<include>>
+@enduml

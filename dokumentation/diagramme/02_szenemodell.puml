@@ -1,0 +1,44 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam ArrowColor #31566A
+skinparam classBackgroundColor #EDF5F6
+skinparam usecaseBackgroundColor #EDF5F6
+skinparam packageBackgroundColor #F9FBFC
+top to bottom direction
+state "Start / Anmeldung" as Login
+state "Administratormenü" as Admin
+state "Normalmenü" as Normal
+state "Sachbearbeiter erfassen" as Create
+state "Sachbearbeiter auswählen\nFortsetzung als Argument" as Select
+state "Sachbearbeiter bearbeiten\nAdmin: Rolle editierbar" as Edit
+state "Sachbearbeiter löschen\nJa / Nein" as Delete
+state "Fortbildung auswählen" as Course
+state "Fortbildung zuordnen" as Assign
+state "Zuordnung auswählen" as Booking
+state "Zuordnung löschen" as Remove
+state "Fortbildungen anzeigen" as Show
+[*] --> Login
+Login --> Admin : gültiger Admin-Login
+Login --> Normal : gültiger Normal-Login
+Admin --> Create
+Admin --> Select : ändern / löschen / Fortbildungen
+Normal --> Select : ändern / Fortbildungen
+Select --> Edit : bearbeiten
+Select --> Delete : löschen (nur Admin)
+Select --> Course : zuordnen
+Course --> Assign : Auswahl
+Select --> Booking : Zuordnung löschen
+Booking --> Remove : Auswahl
+Select --> Show : anzeigen
+Admin --> Login : abmelden
+Normal --> Login : abmelden
+note bottom of Select
+ Szenen und Navigation, keine fachlichen Zustände.
+ Zusätzliche Navigation: Zurück zum Menü.
+ Erfolg: Menü. Fehler: aktuelle Szene mit Hinweis.
+end note
+@enduml
